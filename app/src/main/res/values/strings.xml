@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">SampleCustomMenuItem</string>
+    <string name="reload_data">Reload</string>
 </resources>
