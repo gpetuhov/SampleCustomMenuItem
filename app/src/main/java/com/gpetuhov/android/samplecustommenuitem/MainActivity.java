@@ -103,6 +103,8 @@ public class MainActivity extends AppCompatActivity {
 
       case R.id.activity_main_alerts_menu_item:
         Toast.makeText(this, "count cleared", Toast.LENGTH_SHORT).show();
+        alertCount = 0;
+        updateAlertIcon();
         return true;
 
       default:
