@@ -5,9 +5,16 @@ according to MaterialDesign guidelines-->
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="@dimen/menu_item_size"
-    android:layout_height="@dimen/menu_item_size"
-    android:layout_gravity="center"
-    android:background="?attr/selectableItemBackgroundBorderless">
+    android:layout_height="@dimen/menu_item_size">
+
+    <!-- separate view to display ripple/color change when menu item is clicked -->
+    <!--Needed, because uses custom width and height, which is different for various platforms-->
+    <FrameLayout
+        android:layout_width="@dimen/menu_item_ripple_size"
+        android:layout_height="@dimen/menu_item_ripple_size"
+        android:layout_gravity="center"
+        android:background="?attr/selectableItemBackgroundBorderless"/>
+    <!--This background is needed for ripple effect on click-->
 
     <FrameLayout
         android:layout_width="32dp"
