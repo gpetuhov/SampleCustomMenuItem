@@ -7,10 +7,19 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
+
 public class MainActivity extends AppCompatActivity {
+
+  private FrameLayout redCircle;
+  private TextView countTextView;
+  private int alertCount = 0;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -23,9 +32,16 @@ public class MainActivity extends AppCompatActivity {
     super.onCreateOptionsMenu(menu);
     // Here we inflate menu
     getMenuInflater().inflate(R.menu.activity_main_menu, menu);
-    // And also initialize reload menu item
-    initReloadButton(menu);
     return true;
+  }
+
+  @Override
+  public boolean onPrepareOptionsMenu(Menu menu) {
+    // We have to init menu items with custom view every time menu is drawn,
+    // so we do it here instead of onCreateOptionsMenu()
+    initReloadButton(menu);
+    initAlertButton(menu);
+    return super.onPrepareOptionsMenu(menu);
   }
 
   private void initReloadButton(Menu menu) {
@@ -65,15 +81,43 @@ public class MainActivity extends AppCompatActivity {
     }
   }
 
+  private void initAlertButton(Menu menu) {
+    final MenuItem alertMenuItem = menu.findItem(R.id.activity_main_alerts_menu_item);
+
+    FrameLayout rootView = (FrameLayout) alertMenuItem.getActionView();
+
+    redCircle = rootView.findViewById(R.id.view_alert_red_circle);
+    countTextView = rootView.findViewById(R.id.view_alert_count_textview);
+
+    rootView.setOnClickListener(v -> onOptionsItemSelected(alertMenuItem));
+  }
+
   @Override
   public boolean onOptionsItemSelected(MenuItem item) {
     switch (item.getItemId()) {
       case R.id.activity_main_reload_menu_item:
         Toast.makeText(this, "update clicked", Toast.LENGTH_SHORT).show();
+        alertCount = (alertCount + 1) % 11; // cycle through 0 - 10
+        updateAlertIcon();
+        return true;
+
+      case R.id.activity_main_alerts_menu_item:
+        Toast.makeText(this, "count cleared", Toast.LENGTH_SHORT).show();
         return true;
 
       default:
         return super.onOptionsItemSelected(item);
     }
+  }
+
+  private void updateAlertIcon() {
+    // if alert count extends into two digits, just show the red circle
+    if (0 < alertCount && alertCount < 10) {
+      countTextView.setText(String.valueOf(alertCount));
+    } else {
+      countTextView.setText("");
+    }
+
+    redCircle.setVisibility((alertCount > 0) ? VISIBLE : GONE);
   }
 }
