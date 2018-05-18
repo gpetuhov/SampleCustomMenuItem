@@ -3,16 +3,21 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:gravity="center"
+    android:clickable="true"
+    android:focusable="true"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <!--Reload button itself is not clickable,
+    because the whole LinearLayout is clickable
+    to maximize size of clickable area-->
     <ImageView
         android:id="@+id/reload_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
-        android:clickable="true"
-        android:focusable="true"
+        android:clickable="false"
+        android:focusable="false"
         android:src="@drawable/reload" />
 
 </LinearLayout>
