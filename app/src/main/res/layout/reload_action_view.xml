@@ -5,8 +5,11 @@
     android:gravity="center"
     android:clickable="true"
     android:focusable="true"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="@dimen/menu_item_size"
+    android:layout_height="@dimen/menu_item_size"
+    android:layout_gravity="center"
+    android:background="?attr/selectableItemBackgroundBorderless">
+    <!--This background is needed for ripple effect on click-->
 
     <!--Reload button itself is not clickable,
     because the whole LinearLayout is clickable
