@@ -1,5 +1,7 @@
 # SampleCustomMenuItem
-Implementing custom menu items in toolbar
+Implementing custom menu items in toolbar.
+
+In this example we have 2 menu items. First one, reload button, rotates on click and changes contents of the second one.
 
 Sources:
 
